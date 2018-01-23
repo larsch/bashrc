@@ -1,5 +1,6 @@
 # Enable bash_completion
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+[ -f /etc/bash_completion ] && . /etc/bash_completion
 
 # Set commandline editor to vim
 # C-x C-e
@@ -38,7 +39,11 @@ if command grc &>/dev/null; then
   alias ps='grc ps'
   alias ifconfig='grc ifconfig'
 fi
-alias ls="ls -G"
+if ls --version 2>/dev/null | grep -q GNU; then
+  alias ls='ls --color'
+else
+  alias ls='ls -G'
+fi
 
 # Put brew sbin into PATH
 export PATH="/usr/local/sbin:$PATH"
