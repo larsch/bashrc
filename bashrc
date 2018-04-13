@@ -123,6 +123,14 @@ if [ -s ~/.rvm/scripts/rvm ]; then
   source ~/.rvm/scripts/completion
 fi
 
+# Go stuff
+if [ -d ~/projects/go ]; then
+  export GOPATH=~/projects/go
+fi
+if [ -n "$GOPATH" ]; then
+  export PATH=$PATH:$GOPATH/bin
+fi
+
 # Prompt
 function __prompt_cmd
 {
