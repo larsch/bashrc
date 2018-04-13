@@ -127,6 +127,9 @@ fi
 if [ -d ~/projects/go ]; then
   export GOPATH=~/projects/go
 fi
+if [ -d ~/Private/projects/go ]; then
+  export GOPATH=~/Private/projects/go
+fi
 if [ -n "$GOPATH" ]; then
   export PATH=$PATH:$GOPATH/bin
 fi
