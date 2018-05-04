@@ -147,9 +147,19 @@ function __prompt_cmd
   local green="\\[\\e[32m\\]"
   local yellow="\\[\\e[33m\\]"
   local normal="\\[\\e[m\\]"
+
+  local status_color
+  if [ $exit_status != 0 ]; then
+    status_color="$red"
+  else
+    status_color="$blue"
+  fi
   PS1=""
 
-  PS1+="[$yellow\D{%T}$normal] \\u@\\h$blue \\w$normal"
+  PS1+="${status_color}╭$normal[$yellow\D{%T}$normal] \\u@\\h$blue \\w$normal"
+  PS1+="\\n"
+
+  local let_line
 
   # git based on https://github.com/jimeh/git-aware-prompt/
   local branch
@@ -157,38 +167,38 @@ function __prompt_cmd
     if [ "$branch" = "HEAD" ]; then
       branch='detached*'
     fi
-    PS1+=":${green}${branch}${normal}"
-  fi
+    let_line+="${yellow}${branch}"
 
-  local status=$(git status --porcelain 2> /dev/null)
-  if [[ "$status" != "" ]]; then
-    PS1+="${green}*${normal}"
+    local status=$(git status --porcelain 2> /dev/null)
+    if [[ "$status" != "" ]]; then
+      let_line+="*"
+    fi
+    let_line+="$normal "
   fi
 
   # Python virtualenv
   if [ -n "$VIRTUAL_ENV" ]; then
-    PS1+="[${VIRTUAL_ENV##*/}]"
+    let_line+="$green${VIRTUAL_ENV##*/}$normal "
   fi
 
   # RVM
   if command rvm-prompt &> /dev/null; then
     if [ -n "$(rvm-prompt g)" ]; then
-      PS1+="[$(rvm-prompt)]"
+      let_line+="$red$(rvm-prompt)$normal "
     fi
   fi
 
-  PS1+="\\n"
-
-  # exit status
-  if [ $exit_status != 0 ]; then
-    PS1+=$red
-  else
-    PS1+=$blue
+  # GOPATH
+  if [ "${PWD##$GOPATH}" != "${PWD}" ]; then
+    let_line+="${blue}Good to Go!$normal "
   fi
-  PS1+="▹"
 
-  # Arrow
-  PS1+="${normal} λ "
+  if [ -n "$let_line" ]; then
+    PS1+="${status_color}│$normal $let_line"
+    PS1+="\\n"
+  fi
+
+  PS1+="${status_color}╰${normal} λ "
 
   # Save history continuously
   history -a
