@@ -121,12 +121,6 @@ shopt -s dotglob
 # expand ** and **/
 shopt -s globstar
 
-# Setup rvm
-if [ -s ~/.rvm/scripts/rvm ]; then
-  source ~/.rvm/scripts/rvm
-  source ~/.rvm/scripts/completion
-fi
-
 # Go stuff
 if [ -d ~/projects/go ]; then
   export GOPATH=~/projects/go
@@ -136,6 +130,12 @@ if [ -d ~/Private/projects/go ]; then
 fi
 if [ -n "$GOPATH" ]; then
   export PATH=$PATH:$GOPATH/bin
+fi
+
+# Setup rvm
+if [ -s ~/.rvm/scripts/rvm ]; then
+  source ~/.rvm/scripts/rvm
+  source ~/.rvm/scripts/completion
 fi
 
 # Prompt
