@@ -48,10 +48,14 @@ else
 fi
 
 # Put brew sbin into PATH
-export PATH="/usr/local/sbin:$PATH"
+if [ -d /usr/local/sbin ]; then
+  export PATH="/usr/local/sbin:$PATH"
+fi
 
 # Make gettext availiable from brew
-export PATH="/usr/local/opt/gettext/bin:$PATH"
+if [ -d /usr/local/opt/gettext/bin ]; then
+  export PATH="/usr/local/opt/gettext/bin:$PATH"
+fi
 
 # Add ~/local/*/bin to PATH
 export PATH=$(printf "%s:" ~/local/*/bin):$PATH
