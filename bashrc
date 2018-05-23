@@ -156,7 +156,13 @@ function __prompt_cmd
   fi
   PS1=""
 
-  PS1+="${status_color}╭$normal[$yellow\\D{%T}$normal] \\u@\\h$blue \\w$normal"
+  PS1+="${status_color}╭$normal[$yellow\\D{%T}$normal] \\u@"
+  if [ "$HOSTNAME" = "sandbox" ]; then
+    PS1+="$red\\h$normal"
+  else
+    PS1+="\\h"
+  fi
+  PS1+="$blue \\w$normal"
   PS1+="\\n"
 
   local let_line
