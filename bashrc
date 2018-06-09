@@ -61,7 +61,7 @@ fi
 export PATH=$(printf "%s:" ~/local/*/bin):$PATH
 
 # Allow changing into some dirs directly
-CDPATH=.:~/Projects
+CDPATH=.:~/Projects:~/projects
 
 # Load local bash-completions
 if [ -d ~/local/bash_completion/bash_completion.d/ ]; then
