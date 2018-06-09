@@ -52,7 +52,7 @@ else
 fi
 
 # Single window gvim
-if command -v gvim > /dev/null; then
+if command -v gvim &> /dev/null; then
   alias gvim='gvim --remote-silent'
 fi
 
