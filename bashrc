@@ -232,7 +232,7 @@ PROMPT_COMMAND=__prompt_cmd
 # Don't have python virtual environment set prompt
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-if command fortune &> /dev/null; then
+if command -v fortune &> /dev/null; then
   printf '\033[0;35m'
   fortune -e -s
   printf '\033[0m'
