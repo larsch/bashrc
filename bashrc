@@ -1,3 +1,6 @@
+# shellcheck disable=SC1090
+# shellcheck disable=SC1091
+
 # Enable bash_completion
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 [ -f /usr/share/bash-completion/bash_completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
@@ -41,6 +44,7 @@ if command grc &>/dev/null; then
   alias ps='grc ps'
   alias ifconfig='grc ifconfig'
 fi
+# shellcheck disable=SC2010
 if ls --version 2>/dev/null | grep -q GNU; then
   alias ls='ls --color'
 else
@@ -58,6 +62,7 @@ if [ -d /usr/local/opt/gettext/bin ]; then
 fi
 
 # Add ~/local/*/bin to PATH
+# shellcheck disable=SC2155
 export PATH=$(printf "%s:" ~/local/*/bin):$PATH
 
 # Allow changing into some dirs directly
@@ -156,7 +161,7 @@ function __prompt_cmd
   fi
   PS1=""
 
-  PS1+="${status_color}╭$normal[$yellow\\D{%T}$normal] "
+  PS1+="${status_color}╭${normal}[$yellow\\D{%T}$normal] "
   if [ "$USER" = "vagrant" ]; then
     PS1+="$red\\u$normal"
   else
@@ -180,7 +185,7 @@ function __prompt_cmd
       branch='detached*'
     fi
     let_line+="${yellow}${branch}"
-
+    # shellcheck disable=SC2155
     local status=$(git status --porcelain 2> /dev/null)
     if [[ "$status" != "" ]]; then
       let_line+="*"
