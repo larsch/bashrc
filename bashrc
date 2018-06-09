@@ -51,6 +51,11 @@ else
   alias ls='ls -G'
 fi
 
+# Single window gvim
+if command -v gvim; then
+  alias gvim='gvim --remote-silent'
+fi
+
 # Put brew sbin into PATH
 if [ -d /usr/local/sbin ]; then
   export PATH="/usr/local/sbin:$PATH"
