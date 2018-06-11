@@ -55,6 +55,10 @@ fi
 if command -v gvim &> /dev/null; then
   alias gvim='gvim --remote-silent'
 fi
+# Single window mvim
+if command -v mvim &> /dev/null; then
+  alias mvim='mvim --remote-silent'
+fi
 
 # Put brew sbin into PATH
 if [ -d /usr/local/sbin ]; then
