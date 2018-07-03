@@ -195,10 +195,16 @@ function __prompt_cmd
     fi
     let_line+="${yellow}${branch}"
     # shellcheck disable=SC2155
+    local stash=$(git stash list 2>/dev/null)
+    if [ -n "$stash" ]; then
+      let_line+="^"
+    fi
+    # shellcheck disable=SC2155
     local status=$(git status --porcelain 2> /dev/null)
-    if [[ "$status" != "" ]]; then
+    if [ -n "$status" ]; then
       let_line+="*"
     fi
+
     let_line+="$normal "
   fi
 
