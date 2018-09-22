@@ -7,6 +7,10 @@
 [ -f /etc/bash_completion ] && . /etc/bash_completion
 [ -f /usr/share/doc/pkgfile/command-not-found.bash ] && . /usr/share/doc/pkgfile/command-not-found.bash
 
+if [ "$TERM" = "xterm-kitty" ]; then
+  source <(kitty + complete setup bash)
+fi
+
 # Set commandline editor to vim
 # C-x C-e
 export VISUAL=vim
