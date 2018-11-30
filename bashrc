@@ -231,7 +231,32 @@ function __prompt_cmd
     PS1+="\\n"
   fi
 
-  PS1+="${status_color}╰${normal} λ "
+  # Default prompts
+  local sprompt='λ'
+  local fprompt='λ'
+
+  # Seassonal prompts
+  local md=$(date +%m%d)
+  if [ "$md" -ge 1201 ] && [ "$md" -ge 1223 ]; then
+    sprompt='🎄'
+    fprompt='☃️'
+  fi
+  if [ "$md" -eq 1224 ]; then
+    sprompt='🎅🏻'
+    fprompt='🎁'
+  fi
+  if [ "$md" -eq 0704 ]; then
+    sprompt='🇺🇸 '
+    fprompt='🎇'
+  fi
+
+  if [ $exit_status != 0 ]; then
+    prompt="${fprompt}"
+  else
+    prompt="${sprompt}"
+  fi
+
+  PS1+="${status_color}╰${normal} ${prompt} "
 
   # Save history continuously
   history -a
