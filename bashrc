@@ -239,7 +239,7 @@ function __prompt_cmd
   local sprompt='λ'
   local fprompt='λ'
 
-  # Seassonal prompts
+  # Seasonal prompts
   local md=$(date +%m%d)
   if [ "$md" -ge 1201 ] && [ "$md" -ge 1223 ]; then
     sprompt='🎄'
