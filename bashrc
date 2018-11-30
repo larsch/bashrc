@@ -150,6 +150,7 @@ fi
 if [ -s ~/.rvm/scripts/rvm ]; then
   source ~/.rvm/scripts/rvm
   source ~/.rvm/scripts/completion
+  export PATH="$PATH:$HOME/.rvm/bin"
 fi
 
 # Prompt
